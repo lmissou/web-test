@@ -1,4 +1,4 @@
-export default function importMapPlugin() {
+export default function rollupPluginImportMapGen() {
   return {
     name: 'vite-plugin-import-map-gen',
     buildEnd() {

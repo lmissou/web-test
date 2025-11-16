@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import importMapPlugin from './build/plugins/importMapGenPlugin';
+import rollupPluginImportMapGen from './build/plugins/rollupPluginImportMapGen';
 
 const nodeModulesEntry = [
   'vue',
@@ -11,7 +11,7 @@ const nodeModulesEntry = [
 ].reduce((result, name) => {
   result[name] = `./node_modules/${name}`;
   return result;
-}, {});
+}, {} as { [key: string]: string });
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -29,5 +29,5 @@ export default defineConfig({
     },
     outDir: 'lib',
   },
-  plugins: [importMapPlugin()],
+  plugins: [rollupPluginImportMapGen()],
 });
