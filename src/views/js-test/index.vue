@@ -1,13 +1,24 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import PlayGround from '@/components/PlayGround.vue';
-import initValue from './code.js?raw';
 
-const codeContent = ref(initValue);
+const codeContent = ref('');
+const codeOptions = ref<any[]>([]);
+
+const codes = import.meta.glob<string>('./codes/**/*.js', {
+  eager: true,
+  query: 'raw',
+  import: 'default',
+});
+codeOptions.value = Object.keys(codes).map((key) => ({
+  value: key,
+  label: key,
+  content: codes[key],
+}));
 </script>
 
 <template>
-  <PlayGround v-model="codeContent">
+  <PlayGround v-model="codeContent" :code-options="codeOptions">
     <div id="jslog-container"></div>
   </PlayGround>
 </template>

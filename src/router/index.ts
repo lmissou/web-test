@@ -7,7 +7,12 @@ import {
 const routes: RouteRecordRaw[] = [];
 
 const views = import.meta.glob(
-  ['/src/views/**/*.vue', '!/src/views/**/components/**/*.vue', '!/src/views/**/*code.vue'],
+  [
+    '/src/views/**/*.vue',
+    '!/src/views/**/components/**/*.vue',
+    '!/src/views/**/codes/**',
+    '!/src/views/**/*code.vue',
+  ],
   { eager: true }
 );
 
@@ -19,7 +24,7 @@ Object.keys(views).forEach((key) => {
     path = '';
   }
   if (path.endsWith('/index')) {
-    path = path.substring(0, path.length - 6)
+    path = path.substring(0, path.length - 6);
   }
   const routePath = `/${path}`;
   routes.push({

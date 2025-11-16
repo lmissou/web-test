@@ -2,29 +2,41 @@
 import { ref } from 'vue';
 import PlayGround from '@/components/PlayGround.vue';
 import { compile, mount } from '@/common/compileVue';
-import initValue from './code.vue?raw';
 
-const codeContent = ref(initValue);
+const codeContent = ref('');
+const codeOptions = ref<any[]>([]);
 
-let lastDestroy: Function;
+const codes = import.meta.glob<string>('./codes/**/*.vue', {
+  eager: true,
+  query: 'raw',
+  import: 'default',
+});
+codeOptions.value = Object.keys(codes).map((key) => ({
+  value: key,
+  label: key,
+  content: codes[key],
+}));
+
+const styles = ref<any>([]);
 function handleCodeStr(codeStr: string) {
   const id = 'testComp';
-  if (lastDestroy) {
-    lastDestroy();
-  }
-  const { result, destroy } = compile(codeStr, id);
-  lastDestroy = destroy;
-  return mount(result, '#v-root', id);
+  const result = compile(codeStr, id);
+  styles.value = result.styles;
+  return mount(result.jscode, '#v-root', id);
 }
 </script>
 
 <template>
   <PlayGround
     v-model="codeContent"
+    :code-options="codeOptions"
     :editor-options="{ language: 'html' }"
     :before-eval-code="handleCodeStr"
   >
-    <div id="v-root"></div>
+    <div class="grow">
+      <component is="style" v-for="styleRes in styles" v-text="styleRes.code" />
+      <div id="v-root"></div>
+    </div>
   </PlayGround>
 </template>
 

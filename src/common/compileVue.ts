@@ -7,7 +7,6 @@ import {
 
 // 编译vue组件
 export function compile(codeStr: string, id: string = 'tmp') {
-  const styleDoms: any[] = [];
   const parseResult = parse(codeStr, {
     filename: id,
   });
@@ -15,7 +14,7 @@ export function compile(codeStr: string, id: string = 'tmp') {
   // 样式是否有scoped
   let scoped = false;
   // 处理新样式，添加到head
-  descriptor.styles.forEach((style) => {
+  const styles: any[] = descriptor.styles.map((style) => {
     if (style.scoped) {
       scoped = true;
     }
@@ -25,10 +24,7 @@ export function compile(codeStr: string, id: string = 'tmp') {
       scoped: !!style.scoped,
       filename: id,
     });
-    const dom = document.createElement('style');
-    dom.innerHTML = styleResult.code;
-    document.head.append(dom);
-    styleDoms.push(dom);
+    return styleResult;
   });
   // 编译组件代码和模板
   const script = compileScript(descriptor, { id });
@@ -53,16 +49,7 @@ export function compile(codeStr: string, id: string = 'tmp') {
     'export function render',
     `const _sfc_render = function render`
   );
-  function destroy() {
-    // 移除旧的样式
-    styleDoms.forEach((dom) => {
-      if (dom.parentNode === document.head) {
-        document.head.removeChild(dom);
-      }
-    });
-    styleDoms.splice(0);
-  }
-  const result = `${scriptResult}
+  const jscode = `${scriptResult}
 ${templateResult}
 
 _sfc_main.render = _sfc_render;
@@ -70,8 +57,7 @@ _sfc_main.__scopeId = 'data-v-${id}';
 const ${id} = defineComponent(_sfc_main);
 
 `;
-  // const result = `${scriptResult}\n\n`;
-  return { result, destroy };
+  return { jscode, styles };
 }
 
 export function mount(result: string, containerId: string, id: string = 'tmp') {
