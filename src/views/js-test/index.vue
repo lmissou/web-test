@@ -1,10 +1,15 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import PlayGround from '@/components/PlayGround.vue';
 import initValue from './code.js?raw';
+
+const codeContent = ref(initValue);
 </script>
 
 <template>
-  <PlayGround container-id="res-container" :init-value="initValue" />
+  <PlayGround v-model="codeContent">
+    <div id="jslog-container"></div>
+  </PlayGround>
 </template>
 
 <script lang="ts">

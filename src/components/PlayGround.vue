@@ -1,23 +1,16 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { nextTick, onMounted, ref } from 'vue';
 import * as monaco from 'monaco-editor';
 import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
 import TsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 import HtmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
 import { NButton, NButtonGroup, NSplit } from 'naive-ui';
 
-const props = withDefaults(
-  defineProps<{
-    containerId?: string;
-    initValue?: string;
-    editorOptions?: any;
-    beforeEvalCode?: (code: string) => string;
-  }>(),
-  {
-    containerId: 'container',
-    initValue: '',
-  }
-);
+const props = defineProps<{
+  editorOptions?: any;
+  beforeEvalCode?: (code: string) => string;
+}>();
+const modelValue = defineModel<string>({ default: '' });
 
 if (!window.MonacoEnvironment) {
   window.MonacoEnvironment = {
@@ -38,12 +31,9 @@ const defaultOptions = {
   language: 'javascript',
 };
 
-let subAppRoot: HTMLDivElement;
 let editor: monaco.editor.IStandaloneCodeEditor;
-const modelValue = ref(props.initValue);
 
 const editorDom = ref<HTMLDivElement>();
-const resultDom = ref<HTMLDivElement>();
 
 function initEditor() {
   if (editor) {
@@ -58,17 +48,15 @@ function initEditor() {
     modelValue.value = editor.getValue();
   });
 }
-function initSubApp() {
-  subAppRoot = document.createElement('div');
-  subAppRoot.id = props.containerId;
-  subAppRoot.style.flexGrow = '1';
-  subAppRoot.style.overflow = 'hidden';
-  resultDom.value!.innerHTML = '';
-  resultDom.value!.append(subAppRoot);
+const showDefSlot = ref(true);
+function refreshDefSlot() {
+  showDefSlot.value = false;
+  nextTick(() => {
+    showDefSlot.value = true;
+  })
 }
-
 function evalScript(codeStr: string) {
-  initSubApp();
+  refreshDefSlot();
   const scriptDom = document.createElement('script');
   scriptDom.type = 'module';
   if (props.beforeEvalCode) {
@@ -96,7 +84,7 @@ onMounted(() => {
         <div ref="editorDom" class="grow"></div>
       </template>
       <template #2>
-        <div ref="resultDom" class="flex flex-col grow p-[10px]" />
+        <slot name="default" v-if="showDefSlot" />
       </template>
     </NSplit>
   </div>

@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { compile, mount } from '@/common/compileVue';
+import { ref } from 'vue';
 import PlayGround from '@/components/PlayGround.vue';
+import { compile, mount } from '@/common/compileVue';
 import initValue from './code.vue?raw';
+
+const codeContent = ref(initValue);
 
 let lastDestroy: Function;
 function handleCodeStr(codeStr: string) {
@@ -17,11 +20,12 @@ function handleCodeStr(codeStr: string) {
 
 <template>
   <PlayGround
-    container-id="v-root"
-    :init-value="initValue"
+    v-model="codeContent"
     :editor-options="{ language: 'html' }"
     :before-eval-code="handleCodeStr"
-  />
+  >
+    <div id="v-root"></div>
+  </PlayGround>
 </template>
 
 <script lang="ts">
