@@ -20,6 +20,10 @@ const props = withDefaults(
     codeOptions: () => [],
   }
 );
+const emits = defineEmits<{
+  // 运行代码事件
+  (event: 'eval', code: string): void;
+}>();
 const editorRef = ref<InstanceType<typeof MonacoEditor>>();
 const modelValue = defineModel<string>({ default: '' });
 // 代码选择
@@ -44,17 +48,15 @@ function refreshDefSlot() {
   });
 }
 // 执行代码
-function evalScript(codeStr: string) {
+function handleRun() {
   refreshDefSlot();
-  const scriptDom = document.createElement('script');
-  scriptDom.type = 'module';
-  if (props.beforeEvalCode) {
-    scriptDom.innerHTML = props.beforeEvalCode(codeStr);
-  } else {
-    scriptDom.innerHTML = codeStr;
+  emits('eval', modelValue.value);
+}
+// 更多操作下拉操作
+function handleMoreOp(_key: string, option: any) {
+  if (option.click) {
+    option.click();
   }
-  document.head.append(scriptDom);
-  document.head.removeChild(scriptDom);
 }
 // 更多操作选项
 const moreOptions = ref([
@@ -70,14 +72,9 @@ const moreOptions = ref([
     },
   },
 ]);
-function handleMoreOp(_key: string, option: any) {
-  if (option.click) {
-    option.click();
-  }
-}
 
 onMounted(() => {
-  evalScript(modelValue.value);
+  emits('eval', modelValue.value);
 });
 </script>
 
@@ -115,7 +112,7 @@ onMounted(() => {
                 }deg)`,
               }"
             />
-            <NIcon :component="VideoPlay" @click="evalScript(modelValue)" />
+            <NIcon :component="VideoPlay" @click="handleRun" />
             <NDropdown
               size="small"
               trigger="click"

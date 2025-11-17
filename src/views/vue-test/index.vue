@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { compile } from '@/common/compileVue';
+import { execVue } from '@/common/exec';
 import PlayGround from '@/components/PlayGround.vue';
-import { compile, mount } from '@/common/compileVue';
 
 const codeContent = ref('');
 const codeOptions = ref<any[]>([]);
@@ -18,11 +19,12 @@ codeOptions.value = Object.keys(codes).map((key) => ({
 }));
 
 const styles = ref<any>([]);
-function handleCodeStr(codeStr: string) {
+function handleEval(codeStr: string) {
   const id = 'test';
   const result = compile(codeStr, id);
   styles.value = result.styles;
-  return mount(result.jscode, '#v-root', id);
+  const { render, component } = result;
+  execVue(id, '#v-root', { render, component });
 }
 </script>
 
@@ -31,7 +33,7 @@ function handleCodeStr(codeStr: string) {
     v-model="codeContent"
     :code-options="codeOptions"
     :editor-options="{ language: 'html' }"
-    :before-eval-code="handleCodeStr"
+    @eval="handleEval"
   >
     <div class="flex-1">
       <component is="style" v-for="styleRes in styles" v-text="styleRes.code" />

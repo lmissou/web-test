@@ -28,10 +28,6 @@ export function compile(codeStr: string, id: string = 'tmp') {
   });
   // 编译组件代码和模板
   const script = compileScript(descriptor, { id });
-  const scriptResult = script.content.replace(
-    'export default ',
-    'const _sfc_main = '
-  );
   // 编译模板
   const template = compileTemplate({
     id,
@@ -45,27 +41,5 @@ export function compile(codeStr: string, id: string = 'tmp') {
       } as any,
     },
   });
-  const templateResult = template.code.replace(
-    'export function render',
-    `const _sfc_render = function render`
-  );
-  const jscode = `${scriptResult}
-${templateResult}
-
-_sfc_main.render = _sfc_render;
-_sfc_main.__scopeId = 'data-v-${id}';
-const ${id} = defineComponent(_sfc_main);
-
-`;
-  return { jscode, styles };
-}
-
-export function mount(result: string, containerId: string, id: string = 'tmp') {
-  return `import { createApp, defineComponent } from 'vue';
-import * as Vue from 'vue';
-
-${result}
-
-const app = createApp(${id});
-app.mount('${containerId}');`;
+  return { render: template.code, component: script.content, styles };
 }

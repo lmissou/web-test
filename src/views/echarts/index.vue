@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { exec } from '@/common/exec';
 import PlayGround from '@/components/PlayGround.vue';
 
 const codeContent = ref('');
@@ -15,10 +16,18 @@ codeOptions.value = Object.keys(codes).map((key) => ({
   label: key,
   content: codes[key],
 }));
+
+function handleEval(code: string) {
+  exec(code);
+}
 </script>
 
 <template>
-  <PlayGround v-model="codeContent" :code-options="codeOptions">
+  <PlayGround
+    v-model="codeContent"
+    :code-options="codeOptions"
+    @eval="handleEval"
+  >
     <div id="echarts-container" class="flex-1"></div>
   </PlayGround>
 </template>
