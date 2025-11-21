@@ -21,13 +21,17 @@ export default defineConfig({
   build: {
     copyPublicDir: false,
     lib: {
-      name: 'lib',
       entry: {
         ...nodeModulesEntry,
       },
       formats: ['es'],
+      fileName(_format, entryName) {
+        return `${entryName}.js`;
+      },
     },
-    outDir: 'lib',
   },
-  plugins: [rollupPluginImportMapGen()],
+  plugins: [rollupPluginImportMapGen('http://localhost:5170/')],
+  preview: {
+    port: 5170,
+  },
 });

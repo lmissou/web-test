@@ -12,7 +12,7 @@ function getCodeBlobUrl(code: string) {
 // 执行代码
 export function exec(code: string) {
   const url = getCodeBlobUrl(code);
-  import(url).finally(() => {
+  import(/* @vite-ignore */ url).finally(() => {
     URL.revokeObjectURL(url);
   });
 }
@@ -36,7 +36,7 @@ _sfc_main.render = _sfc_render;\n`;
 const app = createApp(_sfc_main);
 app.mount('${containerSelector}');\n`;
   const resultUrl = getCodeBlobUrl(codeResult);
-  import(resultUrl).finally(() => {
+  import(/* @vite-ignore */ resultUrl).finally(() => {
     URL.revokeObjectURL(compUrl);
     URL.revokeObjectURL(renderUrl);
     URL.revokeObjectURL(resultUrl);

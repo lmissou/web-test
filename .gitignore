@@ -13,7 +13,6 @@ import-map-lib.json
 
 node_modules
 dist
-lib
 dist-ssr
 *.local
 

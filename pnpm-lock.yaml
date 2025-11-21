@@ -14,9 +14,6 @@ importers:
       '@antv/g6-v4':
         specifier: npm:@antv/g6@^4.8.25
         version: '@antv/g6@4.8.25'
-      '@element-plus/icons-vue':
-        specifier: ^2.3.2
-        version: 2.3.2(vue@3.5.24(typescript@5.8.3))
       '@tailwindcss/vite':
         specifier: ^4.1.17
         version: 4.1.17(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass@1.94.0)(stylus@0.64.0)(terser@5.44.1))
@@ -26,6 +23,57 @@ importers:
       monaco-editor:
         specifier: ^0.54.0
         version: 0.54.0
+      tailwindcss:
+        specifier: ^4.1.17
+        version: 4.1.17
+    devDependencies:
+      '@types/node':
+        specifier: ^24.10.1
+        version: 24.10.1
+      copyfiles:
+        specifier: ^2.4.1
+        version: 2.4.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass@1.94.0)(stylus@0.64.0)(terser@5.44.1)
+      vite-plugin-html:
+        specifier: ^3.2.2
+        version: 3.2.2(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass@1.94.0)(stylus@0.64.0)(terser@5.44.1))
+
+  packages/common: {}
+
+  packages/lib:
+    dependencies:
+      '@antv/g6':
+        specifier: ^5.0.50
+        version: 5.0.50(workerize-loader@2.0.2(webpack@5.102.1))
+      '@antv/g6-v4':
+        specifier: npm:@antv/g6@^4.8.25
+        version: '@antv/g6@4.8.25'
+      '@element-plus/icons-vue':
+        specifier: ^2.3.2
+        version: 2.3.2(vue@3.5.24(typescript@5.8.3))
+      echarts:
+        specifier: ^6.0.0
+        version: 6.0.0
+      naive-ui:
+        specifier: ^2.43.1
+        version: 2.43.1(vue@3.5.24(typescript@5.8.3))
+      vue:
+        specifier: ^3.5.24
+        version: 3.5.24(typescript@5.8.3)
+
+  packages/vue-test:
+    dependencies:
+      '@element-plus/icons-vue':
+        specifier: ^2.3.2
+        version: 2.3.2(vue@3.5.24(typescript@5.8.3))
+      lib:
+        specifier: workspace:^
+        version: link:../lib
       naive-ui:
         specifier: ^2.43.1
         version: 2.43.1(vue@3.5.24(typescript@5.8.3))
@@ -35,9 +83,6 @@ importers:
       pinia-plugin-persistedstate:
         specifier: ^4.7.1
         version: 4.7.1(pinia@3.0.4(typescript@5.8.3)(vue@3.5.24(typescript@5.8.3)))
-      tailwindcss:
-        specifier: ^4.1.17
-        version: 4.1.17
       vue:
         specifier: ^3.5.24
         version: 3.5.24(typescript@5.8.3)
@@ -45,33 +90,18 @@ importers:
         specifier: ^4.6.3
         version: 4.6.3(vue@3.5.24(typescript@5.8.3))
     devDependencies:
-      '@types/node':
-        specifier: ^24.10.1
-        version: 24.10.1
       '@vitejs/plugin-vue':
         specifier: ^6.0.1
         version: 6.0.1(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass@1.94.0)(stylus@0.64.0)(terser@5.44.1))(vue@3.5.24(typescript@5.8.3))
       '@vue/tsconfig':
         specifier: ^0.7.0
         version: 0.7.0(typescript@5.8.3)(vue@3.5.24(typescript@5.8.3))
-      copyfiles:
-        specifier: ^2.4.1
-        version: 2.4.1
-      typescript:
-        specifier: ~5.8.3
-        version: 5.8.3
       unplugin-auto-import:
         specifier: ^20.2.0
         version: 20.2.0(@vueuse/core@9.13.0(vue@3.5.24(typescript@5.8.3)))
       unplugin-vue-components:
         specifier: ^30.0.0
         version: 30.0.0(@babel/parser@7.28.5)(vue@3.5.24(typescript@5.8.3))
-      vite:
-        specifier: ^7.2.2
-        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass@1.94.0)(stylus@0.64.0)(terser@5.44.1)
-      vite-plugin-html:
-        specifier: ^3.2.2
-        version: 3.2.2(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass@1.94.0)(stylus@0.64.0)(terser@5.44.1))
       vue-tsc:
         specifier: ^3.1.4
         version: 3.1.4(typescript@5.8.3)

@@ -1,4 +1,4 @@
-export default function rollupPluginImportMapGen() {
+export default function rollupPluginImportMapGen(prefix: string) {
   return {
     name: 'vite-plugin-import-map-gen',
     buildEnd() {
@@ -9,7 +9,7 @@ export default function rollupPluginImportMapGen() {
       if (!entry) return;
       const imports: any = {};
       Object.keys(entry).forEach((key) => {
-        imports[key] = `/${outDir}/${key}.js`;
+        imports[key] = `${prefix}${key}.js`;
       });
       fs.writeFile('import-map-lib.json', JSON.stringify({ imports }, null, 2));
     },
