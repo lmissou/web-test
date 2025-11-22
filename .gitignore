@@ -11,6 +11,7 @@ auto-imports.d.ts
 components.d.ts
 import-map-lib.json
 pnpm-lock.yaml
+package-lock.json
 
 node_modules
 dist
