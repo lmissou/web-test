@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-rou
 
 const routes: RouteRecordRaw[] = [];
 
-const views = import.meta.glob(['/src/views/**/*.vue', '!/src/views/**/components/**/*.vue', '!/src/views/**/codes/**', '!/src/views/**/*code.vue'], {
+const views = import.meta.glob(['/src/views/**/*.vue', '!/src/views/**/components/**/*', '!/src/views/**/codes/**/*'], {
   eager: true,
 });
 
