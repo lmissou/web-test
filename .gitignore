@@ -10,6 +10,7 @@ lerna-debug.log*
 auto-imports.d.ts
 components.d.ts
 import-map-lib.json
+pnpm-lock.yaml
 
 node_modules
 dist

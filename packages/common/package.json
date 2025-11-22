@@ -1,13 +1,20 @@
 {
-  "name": "common",
+  "name": "@web-test/common",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "./src/index.ts",
+  "exposts": "./src/index.ts",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.22.0"
+  "packageManager": "pnpm@10.22.0",
+  "dependencies": {
+    "@vue/compiler-sfc": "^3.5.24"
+  }
 }

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { compile } from '@/common/compileVue';
-import { execVue } from '@/common/exec';
+// import { compile } from '@/common/compileVue';
+// import { execVue } from '@/common/exec';
+import { compileVue, execVue } from '@web-test/common'
 import PlayGround from '@/components/PlayGround.vue';
 
 const codeContent = ref('');
@@ -21,7 +22,7 @@ codeOptions.value = Object.keys(codes).map((key) => ({
 const styles = ref<any>([]);
 function handleEval(codeStr: string) {
   const id = 'test';
-  const result = compile(codeStr, id);
+  const result = compileVue(codeStr, id);
   styles.value = result.styles;
   const { render, component } = result;
   execVue(id, '#v-root', { render, component });
