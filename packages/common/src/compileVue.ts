@@ -1,12 +1,7 @@
-import {
-  parse,
-  compileScript,
-  compileStyle,
-  compileTemplate,
-} from '@vue/compiler-sfc';
+import { parse, compileScript, compileStyle, compileTemplate } from '@vue/compiler-sfc';
 
 // 编译vue组件
-export default function(codeStr: string, id: string = 'tmp') {
+export default function (codeStr: string, id: string = 'tmp') {
   const parseResult = parse(codeStr, {
     filename: id,
   });

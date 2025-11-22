@@ -27,10 +27,7 @@ function initEditor() {
   if (editor.value) {
     return;
   }
-  editor.value = monaco.editor.create(
-    editorDom.value!,
-    Object.assign({ ...defaultOptions }, props.editorOptions)
-  );
+  editor.value = monaco.editor.create(editorDom.value!, Object.assign({ ...defaultOptions }, props.editorOptions));
   watch(
     () => modelValue.value,
     (val) => {

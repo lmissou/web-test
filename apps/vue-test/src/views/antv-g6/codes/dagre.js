@@ -1,18 +1,7 @@
 import { Graph } from '@antv/g6';
 
 const data = {
-  nodes: [
-    { id: '0' },
-    { id: '1' },
-    { id: '2' },
-    { id: '3' },
-    { id: '4' },
-    { id: '5' },
-    { id: '6' },
-    { id: '7' },
-    { id: '8' },
-    { id: '9' },
-  ],
+  nodes: [{ id: '0' }, { id: '1' }, { id: '2' }, { id: '3' }, { id: '4' }, { id: '5' }, { id: '6' }, { id: '7' }, { id: '8' }, { id: '9' }],
   edges: [
     { source: '0', target: '1' },
     { source: '0', target: '2' },

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { compileVue, execVue } from '@web-test/common'
+import { compileVue, execVue } from '@web-test/common';
 import PlayGround from '@/components/PlayGround.vue';
 
 const codeContent = ref('');
@@ -28,12 +28,7 @@ function handleEval(codeStr: string) {
 </script>
 
 <template>
-  <PlayGround
-    v-model="codeContent"
-    :code-options="codeOptions"
-    :editor-options="{ language: 'html' }"
-    @eval="handleEval"
-  >
+  <PlayGround v-model="codeContent" :code-options="codeOptions" :editor-options="{ language: 'html' }" @eval="handleEval">
     <div class="flex-1">
       <component is="style" v-for="styleRes in styles" v-text="styleRes.code" />
       <div id="v-root"></div>

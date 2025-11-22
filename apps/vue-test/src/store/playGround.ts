@@ -12,8 +12,7 @@ export const usePlayGroundStore = defineStore(
     const splitSize = ref<number>(0.4);
 
     function toggleDirection() {
-      splitDirection.value =
-        splitDirection.value === 'horizontal' ? 'vertical' : 'horizontal';
+      splitDirection.value = splitDirection.value === 'horizontal' ? 'vertical' : 'horizontal';
     }
 
     function setSplitSize(size: number) {

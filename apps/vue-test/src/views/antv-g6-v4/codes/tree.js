@@ -178,14 +178,10 @@ G6.registerNode(
       return `
       <group>
         <rect draggable="true" style={{width: ${width}, height: 42, stroke: ${stroke}, radius: 4}} keyshape>
-          <text style={{ fontSize: 16, marginLeft: 12, marginTop: 12 }}>${
-            cfg.label
-          }</text>
-          <text style={{ marginLeft: ${
-            width - 16
-          }, marginTop: -20, stroke: '#66ccff', fill: '#000', cursor: 'pointer', opacity: ${
-        cfg.hover ? 0.75 : 0
-      } }} action="add">+</text>
+          <text style={{ fontSize: 16, marginLeft: 12, marginTop: 12 }}>${cfg.label}</text>
+          <text style={{ marginLeft: ${width - 16}, marginTop: -20, stroke: '#66ccff', fill: '#000', cursor: 'pointer', opacity: ${
+            cfg.hover ? 0.75 : 0
+          } }} action="add">+</text>
         </rect>
       </group>
     `;
@@ -208,26 +204,16 @@ G6.registerNode(
 
       return `
       <group>
-        <rect draggable="true" style={{width: ${
-          width + 24
-        }, height: 22}} keyshape>
-          <text draggable="true" style={{ fontSize: 14, marginLeft: 12, marginTop: 6 }}>${
-            cfg.label
-          }</text>
-          <text style={{ marginLeft: ${
-            width - 8
-          }, marginTop: -10, stroke: ${color}, fill: '#000', cursor: 'pointer', opacity: ${
-        cfg.hover ? 0.75 : 0
-      }, next: 'inline' }} action="add">+</text>
-          <text style={{ marginLeft: ${
-            width - 4
-          }, marginTop: -10, stroke: ${color}, fill: '#000', cursor: 'pointer', opacity: ${
-        cfg.hover ? 0.75 : 0
-      }, next: 'inline' }} action="delete">-</text>
+        <rect draggable="true" style={{width: ${width + 24}, height: 22}} keyshape>
+          <text draggable="true" style={{ fontSize: 14, marginLeft: 12, marginTop: 6 }}>${cfg.label}</text>
+          <text style={{ marginLeft: ${width - 8}, marginTop: -10, stroke: ${color}, fill: '#000', cursor: 'pointer', opacity: ${
+            cfg.hover ? 0.75 : 0
+          }, next: 'inline' }} action="add">+</text>
+          <text style={{ marginLeft: ${width - 4}, marginTop: -10, stroke: ${color}, fill: '#000', cursor: 'pointer', opacity: ${
+            cfg.hover ? 0.75 : 0
+          }, next: 'inline' }} action="delete">-</text>
         </rect>
-        <rect style={{ fill: ${color}, width: ${
-        width + 24
-      }, height: 2, x: 0, y: 22 }} />
+        <rect style={{ fill: ${color}, width: ${width + 24}, height: 2, x: 0, y: 22 }} />
         
       </group>
     `;
@@ -250,26 +236,16 @@ G6.registerNode(
 
       return `
       <group>
-        <rect draggable="true" style={{width: ${
-          width + 20
-        }, height: 26, fill: 'transparent' }}>
-          <text style={{ fontSize: 12, marginLeft: 12, marginTop: 6 }}>${
-            cfg.label
-          }</text>
-              <text style={{ marginLeft: ${
-                width - 8
-              }, marginTop: -10, stroke: ${color}, fill: '#000', cursor: 'pointer', opacity: ${
-        cfg.hover ? 0.75 : 0
-      }, next: 'inline' }} action="add">+</text>
-              <text style={{ marginLeft: ${
-                width - 4
-              }, marginTop: -10, stroke: ${color}, fill: '#000', cursor: 'pointer', opacity: ${
-        cfg.hover ? 0.75 : 0
-      }, next: 'inline' }} action="delete">-</text>
+        <rect draggable="true" style={{width: ${width + 20}, height: 26, fill: 'transparent' }}>
+          <text style={{ fontSize: 12, marginLeft: 12, marginTop: 6 }}>${cfg.label}</text>
+              <text style={{ marginLeft: ${width - 8}, marginTop: -10, stroke: ${color}, fill: '#000', cursor: 'pointer', opacity: ${
+                cfg.hover ? 0.75 : 0
+              }, next: 'inline' }} action="add">+</text>
+              <text style={{ marginLeft: ${width - 4}, marginTop: -10, stroke: ${color}, fill: '#000', cursor: 'pointer', opacity: ${
+                cfg.hover ? 0.75 : 0
+              }, next: 'inline' }} action="delete">-</text>
         </rect>
-        <rect style={{ fill: ${color}, width: ${
-        width + 24
-      }, height: 2, x: 0, y: 32 }} />
+        <rect style={{ fill: ${color}, width: ${width + 24}, height: 2, x: 0, y: 32 }} />
         
       </group>
     `;
@@ -309,13 +285,10 @@ G6.registerBehavior('dice-mindmap', {
           children: (model.children || []).concat([
             {
               id: newId,
-              direction:
-                newId.charCodeAt(newId.length - 1) % 2 === 0 ? 'right' : 'left',
+              direction: newId.charCodeAt(newId.length - 1) % 2 === 0 ? 'right' : 'left',
               label: 'New',
               type: 'dice-mind-map-leaf',
-              color:
-                model.color ||
-                colorArr[Math.floor(Math.random() * colorArr.length)],
+              color: model.color || colorArr[Math.floor(Math.random() * colorArr.length)],
             },
           ]),
         });
@@ -324,9 +297,7 @@ G6.registerBehavior('dice-mindmap', {
       case 'delete':
         const parent = evt.item.get('parent');
         evt.currentTarget.updateItem(parent, {
-          children: (parent.get('model').children || []).filter(
-            (e) => e.id !== model.id
-          ),
+          children: (parent.get('model').children || []).filter((e) => e.id !== model.id),
         });
         evt.currentTarget.layout(false);
         break;
@@ -358,8 +329,7 @@ G6.registerBehavior('dice-mindmap', {
     const input = document.createElement('input');
     input.style.border = 'none';
     input.value = model.label;
-    input.style.width =
-      Util.getTextSize(model.label, fontSizeMap[model.type])[0] + 'px';
+    input.style.width = Util.getTextSize(model.label, fontSizeMap[model.type])[0] + 'px';
     input.className = 'dice-input';
     el.className = 'dice-input';
     el.appendChild(input);
@@ -368,13 +338,7 @@ G6.registerBehavior('dice-mindmap', {
       document.body.removeChild(el);
     };
     const clickEvt = (event) => {
-      if (
-        !(
-          event.target &&
-          event.target.className &&
-          event.target.className.includes('dice-input')
-        )
-      ) {
+      if (!(event.target && event.target.className && event.target.className.includes('dice-input'))) {
         window.removeEventListener('mousedown', clickEvt);
         window.removeEventListener('scroll', clickEvt);
         graph.updateItem(item, {
@@ -466,15 +430,12 @@ const dataTransform = (data) => {
 
     if (level === 1 && !d.direction) {
       if (!d.direction) {
-        data.direction =
-          d.id.charCodeAt(d.id.length - 1) % 2 === 0 ? 'right' : 'left';
+        data.direction = d.id.charCodeAt(d.id.length - 1) % 2 === 0 ? 'right' : 'left';
       }
     }
 
     if (d.children) {
-      data.children = d.children.map((child) =>
-        changeData(child, level + 1, data.color)
-      );
+      data.children = d.children.map((child) => changeData(child, level + 1, data.color));
     }
     return data;
   };
@@ -498,9 +459,7 @@ const tree = new G6.TreeGraph({
       return 16;
     },
     getWidth: (node) => {
-      return node.level === 0
-        ? Util.getTextSize(node.label, 16)[0] + 12
-        : Util.getTextSize(node.label, 12)[0];
+      return node.level === 0 ? Util.getTextSize(node.label, 16)[0] + 12 : Util.getTextSize(node.label, 12)[0];
     },
     getVGap: () => {
       return 10;

@@ -17,11 +17,7 @@ export function exec(code: string) {
   });
 }
 // 执行vue组件代码（挂载）
-export function execVue(
-  id: string,
-  containerSelector: string,
-  modules: IVueModuleProps
-) {
+export function execVue(id: string, containerSelector: string, modules: IVueModuleProps) {
   const compUrl = getCodeBlobUrl(modules.component);
   const renderUrl = modules.render ? getCodeBlobUrl(modules.render) : '';
   let codeResult = `import { createApp, defineComponent } from 'vue';

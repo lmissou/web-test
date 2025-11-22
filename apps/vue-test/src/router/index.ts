@@ -1,20 +1,10 @@
-import {
-  createRouter,
-  createWebHashHistory,
-  type RouteRecordRaw,
-} from 'vue-router';
+import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [];
 
-const views = import.meta.glob(
-  [
-    '/src/views/**/*.vue',
-    '!/src/views/**/components/**/*.vue',
-    '!/src/views/**/codes/**',
-    '!/src/views/**/*code.vue',
-  ],
-  { eager: true }
-);
+const views = import.meta.glob(['/src/views/**/*.vue', '!/src/views/**/components/**/*.vue', '!/src/views/**/codes/**', '!/src/views/**/*code.vue'], {
+  eager: true,
+});
 
 Object.keys(views).forEach((key) => {
   const { default: component, meta } = views[key] as any;

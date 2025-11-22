@@ -64,11 +64,7 @@ const moreOptions = ref([
     label: '格式化',
     key: 'format',
     click() {
-      editorRef.value?.editor?.trigger(
-        'command',
-        'editor.action.formatDocument',
-        {}
-      );
+      editorRef.value?.editor?.trigger('command', 'editor.action.formatDocument', {});
     },
   },
 ]);
@@ -79,18 +75,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <NSplit
-    class="overflow-auto"
-    pane1-class="flex flex-col"
-    pane2-class="flex flex-col"
-    :direction="splitDirection"
-    v-model:size="splitSize"
-  >
+  <NSplit class="overflow-auto" pane1-class="flex flex-col" pane2-class="flex flex-col" :direction="splitDirection" v-model:size="splitSize">
     <template #1>
       <div class="flex flex-col flex-1 overflow-auto">
-        <div
-          class="flex flex-row justify-between items-center mb-1 mx-2.5 text-base"
-        >
+        <div class="flex flex-row justify-between items-center mb-1 mx-2.5 text-base">
           <div class="flex flex-row justify-end items-center gap-1">
             <NSelect
               v-if="props.codeOptions.length > 0"
@@ -107,28 +95,16 @@ onMounted(() => {
               @click="toggleDirection"
               class="transition-transform"
               :style="{
-                transform: `rotate(${
-                  splitDirection === 'vertical' ? 0 : 90
-                }deg)`,
+                transform: `rotate(${splitDirection === 'vertical' ? 0 : 90}deg)`,
               }"
             />
             <NIcon :component="VideoPlay" @click="handleRun" />
-            <NDropdown
-              size="small"
-              trigger="click"
-              placement="bottom-start"
-              :options="moreOptions"
-              @select="handleMoreOp"
-            >
+            <NDropdown size="small" trigger="click" placement="bottom-start" :options="moreOptions" @select="handleMoreOp">
               <NIcon :component="More" />
             </NDropdown>
           </div>
         </div>
-        <MonacoEditor
-          ref="editorRef"
-          v-model="modelValue"
-          :editorOptions="props.editorOptions"
-        />
+        <MonacoEditor ref="editorRef" v-model="modelValue" :editorOptions="props.editorOptions" />
       </div>
     </template>
     <template #2>
