@@ -6,6 +6,7 @@
   "scripts": {
     "build:lib": "pnpm -F lib build",
     "preview:lib": "pnpm -F lib preview",
+    "build:common": "pnpm -F common build",
     "dev:vue": "pnpm -F vue-test dev",
     "build:vue": "pnpm -F vue-test build",
     "preview:vue": "pnpm -F vue-test preview"
@@ -22,6 +23,7 @@
     "@types/node": "^24.10.1",
     "copyfiles": "^2.4.1",
     "typescript": "~5.8.3",
+    "unplugin-dts": "1.0.0-beta.6",
     "vite": "^7.2.2",
     "vite-plugin-html": "^3.2.2"
   }

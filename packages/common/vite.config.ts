@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import dts from 'unplugin-dts/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -8,7 +9,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'src/index.ts',
-      formats: ['es'],
+      formats: ['es', 'cjs'],
     },
   },
+  plugins: [dts()]
 });

@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-// import { compile } from '@/common/compileVue';
-// import { execVue } from '@/common/exec';
 import { compileVue, execVue } from '@web-test/common'
 import PlayGround from '@/components/PlayGround.vue';
 

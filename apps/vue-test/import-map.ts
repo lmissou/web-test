@@ -4,7 +4,7 @@ const importMap = {
 
 try {
   // @ts-ignore
-  const importMapLib = await import('../lib/import-map-lib.json');
+  const importMapLib = await import('../../packages/lib/import-map-lib.json');
   // @ts-ignore
   Object.assign(importMap.imports, importMapLib.imports);
 } catch (err) {
