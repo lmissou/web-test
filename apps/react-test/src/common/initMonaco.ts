@@ -9,7 +9,7 @@ function initMonaco() {
     return;
   }
   window.MonacoEnvironment = {
-    getWorker(_workerId: string, label:  string) {
+    getWorker(_workerId: string, label: string) {
       if (label === 'javascript' || label === 'typescript') {
         return new tsWorker();
       }
