@@ -36,11 +36,15 @@ function PlayGround(props: Props) {
     });
   }
   const [codeSelect, setCodeSelect] = useState('');
+  let hasInitEval = false;
   useEffect(() => {
     if (props.codeOptions?.length! > 0) {
       setCodeSelect(props.codeOptions?.[0].value);
       props.onChange?.(props.codeOptions?.[0].content);
-      props.onEval?.(props.codeOptions?.[0].content);
+      if (!hasInitEval) {
+        hasInitEval = true;
+        props.onEval?.(props.codeOptions?.[0].content);
+      }
     }
   }, []);
   function handleCodeChange(value: string, option: any) {
