@@ -6,7 +6,7 @@ import PlayGround from '@/components/PlayGround.vue';
 const codeContent = ref('');
 const codeOptions = ref<any[]>([]);
 
-const codes = import.meta.glob<string>('./codes/**/*.vue', {
+const codes = import.meta.glob<string>('#/codes/vue/**/*.vue', {
   eager: true,
   query: 'raw',
   import: 'default',

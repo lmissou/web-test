@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { exec } from '@web-test/common';
 import PlayGround from '@/components/PlayGround';
 
-const codes = import.meta.glob<string>('./codes/**/*.js', {
+const codes = import.meta.glob<string>('#/codes/g6-v4/**/*.js', {
   eager: true,
   query: 'raw',
   import: 'default',
 });
 
-function JsTest() {
+function G6Test() {
   const [codeContent, setCodeContent] = useState('');
   const [codeOptions] = useState<any[]>(() =>
     Object.keys(codes).map((key) => ({
@@ -22,12 +22,12 @@ function JsTest() {
   }
   return (
     <PlayGround value={codeContent} codeOptions={codeOptions} onChange={setCodeContent} onEval={handleEval}>
-      <div id="jslog-container" className="flex-1"></div>
+      <div id="g6v4-container" className="flex-1"></div>
     </PlayGround>
   );
 }
 
-export default JsTest;
+export default G6Test;
 export const meta = {
-  title: 'js测试',
+  title: 'echarts测试',
 };

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { compileVue, execVue } from '@web-test/common';
 import PlayGround from '@/components/PlayGround';
 
-const codes = import.meta.glob<string>('./codes/**/*.vue', {
+const codes = import.meta.glob<string>('#/codes/vue/**/*.vue', {
   eager: true,
   query: 'raw',
   import: 'default',

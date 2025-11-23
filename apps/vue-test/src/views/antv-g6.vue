@@ -6,7 +6,7 @@ import PlayGround from '@/components/PlayGround.vue';
 const codeContent = ref('');
 const codeOptions = ref<any[]>([]);
 
-const codes = import.meta.glob<string>('./codes/**/*.js', {
+const codes = import.meta.glob<string>('#/codes/g6/**/*.js', {
   eager: true,
   query: 'raw',
   import: 'default',
@@ -24,10 +24,10 @@ function handleEval(code: string) {
 
 <template>
   <PlayGround v-model="codeContent" :code-options="codeOptions" @eval="handleEval">
-    <div id="echarts-container" class="flex-1"></div>
+    <div id="g6-container" class="flex-1"></div>
   </PlayGround>
 </template>
 
 <script lang="ts">
-export const meta = { title: 'echarts测试' };
+export const meta = { title: 'antv/g6测试' };
 </script>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { exec } from '@web-test/common';
 import PlayGround from '@/components/PlayGround';
 
-const codes = import.meta.glob<string>('./codes/**/*.js', {
+const codes = import.meta.glob<string>('#/codes/g6/**/*.js', {
   eager: true,
   query: 'raw',
   import: 'default',
