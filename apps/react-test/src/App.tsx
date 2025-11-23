@@ -1,8 +1,22 @@
-import { RouterProvider } from 'react-router';
-import router from './router';
+import { ConfigProvider, type ThemeConfig } from 'antd';
+import AppRouter from './router';
+import MyLayout from './components/MyLayout';
+
+const theme: ThemeConfig = {
+  token: {
+    colorPrimary: '#409EFF',
+    colorBgBase: '#FFFFFF',
+  },
+};
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ConfigProvider theme={theme}>
+      <MyLayout>
+        <AppRouter />
+      </MyLayout>
+    </ConfigProvider>
+  );
 }
 
 export default App;

@@ -5,6 +5,8 @@ const nodeModulesEntry = [
   'vue',
   'naive-ui',
   '@element-plus/icons-vue',
+  "antd",
+  "@ant-design/icons",
   'echarts',
   '@antv/g6',
   '@antv/g6-v4',

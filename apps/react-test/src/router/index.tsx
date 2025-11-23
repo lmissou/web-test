@@ -1,4 +1,4 @@
-import { createBrowserRouter, type RouteObject } from 'react-router';
+import { createHashRouter, RouterProvider, type RouteObject } from 'react-router';
 
 export type RouteObjectWithMeta = RouteObject & {
   meta?: {
@@ -36,6 +36,10 @@ Object.keys(views).forEach((key) => {
   });
 });
 
-const router = createBrowserRouter(routes);
+const router = createHashRouter(routes);
 
-export default router;
+function AppRouter() {
+  return <RouterProvider router={router} />;
+}
+
+export default AppRouter;

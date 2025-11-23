@@ -8,9 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^6.1.0",
     "@antv/g6": "^5.0.50",
     "@antv/g6-v4": "npm:@antv/g6@^4.8.25",
     "@element-plus/icons-vue": "^2.3.2",
+    "antd": "^6.0.0",
     "echarts": "^6.0.0",
     "naive-ui": "^2.43.1",
     "vue": "^3.5.24"
